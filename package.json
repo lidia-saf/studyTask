@@ -14,7 +14,7 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "start": "npm start",
+    "start": "./node_modules/.bin/react-scripts start",
     "build": "npm install",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
