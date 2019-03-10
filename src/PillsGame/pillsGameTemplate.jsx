@@ -14,7 +14,7 @@ export const PillsGameTemplate = ({
             {pillsArray.map((pill,i) => {
                 return (
                     <Pill
-                        key={pill.positionX + i}
+                        key={pill.id}
                         transition={pill.transition}
                         type={pill.type}
                         positionX={pill.positionX}

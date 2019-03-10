@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { PillsGameTemplate } from './PillsGameTemplate';
+import uuid from 'uuid';
 
 class PillsGameBehaviour extends React.Component {
     constructor(props) {
@@ -8,7 +9,6 @@ class PillsGameBehaviour extends React.Component {
           requestId: 0,
           transition: 0,
           counter: 0,
-          choice: 'killPill',
           pillsArray: [],
           timerInterval: 0,
           timeLeft: 30,
@@ -20,28 +20,30 @@ class PillsGameBehaviour extends React.Component {
 
     }
 
-    componentDidMount() {
-        const {
-            requestAnimationFrame,
-            webkitRequestAnimationFrame,
-            mozRequestAnimationFrame,
-            msRequestAnimationFrame,
-            oRequestAnimationFrame,
-        } = window;
-
-        const requestAF =
-            requestAnimationFrame ||
-            webkitRequestAnimationFrame ||
-            mozRequestAnimationFrame ||
-            msRequestAnimationFrame ||
-            oRequestAnimationFrame;
-        requestAF(this.frame);
-        const timerInterval = setInterval(this.controlTimer, 1000);
-        this.setState({requestId: requestAF,
-                        timerInterval: timerInterval,
-                        thenTime: Date.now()
-                    });
-        this.mounted = true;
+    componentDidUpdate(prevProps, _) {
+        if (this.props.gameStarted !== prevProps.gameStarted && this.props.gameStarted === true) {
+            const {
+                requestAnimationFrame,
+                webkitRequestAnimationFrame,
+                mozRequestAnimationFrame,
+                msRequestAnimationFrame,
+                oRequestAnimationFrame,
+            } = window;
+    
+            const requestAF =
+                requestAnimationFrame ||
+                webkitRequestAnimationFrame ||
+                mozRequestAnimationFrame ||
+                msRequestAnimationFrame ||
+                oRequestAnimationFrame;
+            requestAF(this.frame);
+            const timerInterval = setInterval(this.controlTimer, 1000);
+            this.setState({requestId: requestAF,
+                            timerInterval: timerInterval,
+                            thenTime: Date.now()
+                        });
+            this.mounted = true;
+        }
     }
 
     componentWillUnmount() {
@@ -61,12 +63,14 @@ class PillsGameBehaviour extends React.Component {
             clearInterval(this.state.timerInterval);
             window.cancelAnimationFrame(this.state.requestId);
             this.setState({pillsArray: []})
+            this.props.getScoreFromPillsGame(this.state.counter);
         }
     }
 
     frame() {
 
         if (this.state.timeLeft > 0) {
+
             const fpsInterval = 2000;
             requestAnimationFrame(this.frame);
             let now = Date.now();
@@ -103,7 +107,7 @@ class PillsGameBehaviour extends React.Component {
                 y1: 0,
                 y2: 100,
                 transition: this.chooseSpeed(),
-                id: Math.random() * 100000
+                id: uuid.v4()
             }
             pillsArray.push(pill);
         }
@@ -120,22 +124,26 @@ class PillsGameBehaviour extends React.Component {
     }
 
     chooseSpeed() {
-        let speed = 5;
+        let speed = 4;
         if (this.state.counter > 2) {
-            speed = 4;
-        } else if (this.state.counter > 4) {
             speed = 3;
-        } else if (this.state.counter > 5) {
+        } else if (this.state.counter > 4) {
             speed = 2;
+        } else if (this.state.counter > 5) {
+            speed = 1;
         }
+
+        this.setState({
+            transition: speed
+        })
         return speed;
     }
 
-    onPillClick() {
+    onPillClick(value) {
         this.setState(prevState => {
             return {
                 ...prevState,
-                counter: prevState.counter + 1,
+                counter: prevState.counter + value,
             }
         })
     }
