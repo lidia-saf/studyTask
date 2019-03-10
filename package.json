@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.3.4",
+    "acorn": "^6.1.1",
     "autobind-decorator": "^2.4.0",
     "lodash": "^4.17.11",
     "react": "^16.8.4",
@@ -12,8 +14,8 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "npm start",
+    "build": "npm install",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
