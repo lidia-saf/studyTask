@@ -16,5 +16,4 @@ class App extends Component {
 export default App;
 
 const Root = styled.div`
-  height: 100%;
 `;
