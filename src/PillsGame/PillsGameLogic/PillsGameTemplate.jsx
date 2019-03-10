@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Pill } from './Pill';
+import { PillBehaviour } from '../Pill/PillBehaviour';
 
 export const PillsGameTemplate = ({
     pillsArray,
@@ -13,7 +13,7 @@ export const PillsGameTemplate = ({
         <Game>
             {pillsArray.map((pill,i) => {
                 return (
-                    <Pill
+                    <PillBehaviour
                         key={pill.id}
                         transition={pill.transition}
                         type={pill.type}

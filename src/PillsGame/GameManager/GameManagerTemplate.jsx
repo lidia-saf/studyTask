@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { StartingPopup } from '../StartingPopup';
-import { PillsGame } from '..';
+import { PillsGameLogic } from '../PillsGameLogic/index';
 import { EndingPopup } from '../EndingPopup';
 
 export const GameManagerTemplate = ({
@@ -21,7 +21,7 @@ export const GameManagerTemplate = ({
             score={score}
             endingPopupShown={endingPopupShown}
         />
-        <PillsGame
+        <PillsGameLogic
             gameStarted={gameStarted}
             getScoreFromPillsGame={getScoreFromPillsGame}
         />
