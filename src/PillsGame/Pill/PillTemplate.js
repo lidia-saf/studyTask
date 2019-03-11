@@ -18,6 +18,7 @@ export const PillTemplate = ({
             <Canvas
                 ref={canvasRef}
                 onTouchStart={(e) => onClick(e)}
+                onClick={(e) => onClick(e)}
                 background={background}
                 id={value}
                 margin={margin}

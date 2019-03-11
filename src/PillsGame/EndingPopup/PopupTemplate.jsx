@@ -28,6 +28,7 @@ const Root = styled.div`
     overflow: auto;
     opacity: 0.9;
     background-color: #4f4f4f;
+    margin: 0 auto;
 `;
 
 const Content = styled.div`
