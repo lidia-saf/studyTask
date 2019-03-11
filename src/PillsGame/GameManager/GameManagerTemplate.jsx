@@ -32,6 +32,5 @@ export const GameManagerTemplate = ({
 
 const Root = styled.section`
     box-sizing: border-box;
-    max-width: 600px;
     margin: 0 auto;
 `;
