@@ -9,7 +9,7 @@ import Tempoflu from './images/tempoflu.svg';
 
 export const PillsGameTemplate = ({
     pillsArray,
-    counter,
+    temperature,
     onPillClick,
     timeLeft
 }) => (
@@ -30,27 +30,25 @@ export const PillsGameTemplate = ({
                     <PicturePill3 width={33} height={20} background={Okhlazeltser} />
                 </EligiblePills>
                 <ProgressBar>
-
+                    <Temperature temperature={temperature}>{temperature}</Temperature>
                 </ProgressBar>
             </GameIndicators>
-            {pillsArray.map((pill,i) => {
-                return (
-                    <PillBehaviour
-                        key={pill.id}
-                        transition={pill.transition}
-                        type={pill.type}
-                        positionX={pill.positionX}
-                        id={pill.id}
-                        x1={pill.x1}
-                        x2={pill.x2}
-                        y1={pill.y1}
-                        y2={pill.y2}
-                        index={i}
-                        onPillClick={onPillClick}
-                    />
-                )
-            }
-            )}
+            <PillsContainer>
+                {pillsArray.map((pill,i) => {
+                    return (
+                        <PillBehaviour
+                            key={i}
+                            value={pill.value}
+                            margin={pill.margin}
+                            background={pill.background}
+                            onPillClick={onPillClick}
+                            width={pill.width}
+                            height={pill.height}
+                        />
+                    )
+                }
+                )}
+            </PillsContainer>
         </Game>
 
 
@@ -110,10 +108,11 @@ const PicturePill3 = styled.div`
 
 const ProgressBar  = styled.div`
     width: 148px;
-    height: 32px;
+    height: 24px;
     opacity: 0.2;
     border-radius: 8px;
     border: solid 2px #4f4f4f;
+    padding: 4px;
 `;
 
 const Game = styled.div`
@@ -161,4 +160,23 @@ const StepSecond = styled.span`
     font-weight: 300;
     text-align: right;
     color: #4f4f4f;
+`;
+
+const PillsContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 41px 0 36px;
+`;
+
+const Temperature = styled.div`
+    height: 24px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #4f4f4f;
+    margin: 0 auto;
+    text-align: right;
+    line-height: 24px;
+    background-image: linear-gradient(to left, #dedede, #a7a7a7 50%, #6d6d6d);
 `;

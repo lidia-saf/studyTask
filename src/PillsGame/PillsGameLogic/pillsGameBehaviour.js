@@ -1,18 +1,106 @@
 import * as React from 'react';
 import { PillsGameTemplate } from './PillsGameTemplate';
-import uuid from 'uuid';
+
+import Antiustalin from './images/antiustalinBig.svg';
+import ButtonPill from './images/buttonPill.svg';
+import LyingPillBig from './images/lyingPillBig.svg';
+import OkhazeltserBig from './images/okhazeltserBig.svg';
+import SyringeBig from './images/syringeBig.svg';
+import TempofluBig from './images/tempofluBig.svg';
+import UstalinBig from './images/ustalinBig.svg';
 
 class PillsGameBehaviour extends React.Component {
     constructor(props) {
       super(props)
       this.state={
           requestId: 0,
-          transition: 0,
-          counter: 0,
-          pillsArray: [],
+          temperature: 40,
           timerInterval: 0,
-          timeLeft: 30,
-          results: []
+          stageValue: 4,
+          timeLeft: 10,
+          pills: [
+            {
+                background: Antiustalin,
+                value: 1,
+                margin: '10px 40px 20px 5px',
+                width: 44,
+                height: 44
+            },
+            {
+                background: ButtonPill,
+                value: 0,
+                margin: '7px 25px 2px 30px',
+                width: 61,
+                height: 45
+            },
+            {
+                background: LyingPillBig,
+                value: 0,
+                margin: '17px 3px 10px 5px',
+
+                width: 34,
+                height: 17
+            },
+        
+            {
+                background: OkhazeltserBig,
+                value: 1,
+                margin: '8px 20px 6px 10px',
+
+                width: 47,
+                height: 34
+            },
+        
+            {
+                background: SyringeBig,
+                value: 0,
+                margin: '10px 12px 6px 3px',
+
+                width: 44,
+                height: 70
+            },
+        
+            {
+                background: TempofluBig,
+                value: 1,
+                margin: '5px',
+                width: 34,
+                height: 34
+            },
+            {
+                background: ButtonPill,
+                value: 0,
+                margin: '10px 8px 2px 5px',
+                width: 61,
+                height: 45
+            },
+        
+            {
+                background: UstalinBig,
+                value: 0,
+                margin: '4px 7px 3px 10px',
+                width: 44,
+                height: 44
+            },
+            
+        
+        
+            {
+                background: OkhazeltserBig,
+                value: 1,
+                margin: '7px 3px 10px 10px',
+
+                width: 47,
+                height: 34
+            },
+            {
+                background: LyingPillBig,
+                value: 1,
+                margin: '6px 10px 8px 2px',
+                width: 34,
+                height: 17
+            },
+        ]
       }
       this.frame = this.frame.bind(this);
       this.onPillClick = this.onPillClick.bind(this);
@@ -62,7 +150,6 @@ class PillsGameBehaviour extends React.Component {
         } else {
             clearInterval(this.state.timerInterval);
             window.cancelAnimationFrame(this.state.requestId);
-            this.setState({pillsArray: []})
             this.props.getScoreFromPillsGame(this.state.counter);
         }
     }
@@ -77,7 +164,7 @@ class PillsGameBehaviour extends React.Component {
             let elapsed = now - this.state.thenTime;
     
     
-            if (elapsed > fpsInterval) {
+            if (elapsed > fpsInterval && this.state.stageValue === 0) {
     
                 this.setState(prevState => {
                     return {
@@ -85,75 +172,33 @@ class PillsGameBehaviour extends React.Component {
                         thenTime: now - (elapsed % fpsInterval)
                     }
                 })
-                this.createPills();
+                this.shufflePills();
             }
         }
     }
 
-    choosePill() {
-        const HEAL_PILL_PROBABILITY = 0.7;
-        return Math.random() > HEAL_PILL_PROBABILITY ? 'healPill' : 'killPill';
-    }
 
-    createPills() {
-        const amount = 2;
-        const pillsArray = this.state.pillsArray;
+    shufflePills() {
 
-        for (let i = 0; i < amount; ++i) {
-            let pill = {
-                type: this.choosePill(),
-                x1: Math.random() * 100,
-                x2: Math.random() * 100,
-                y1: 0,
-                y2: 100,
-                transition: this.chooseSpeed(),
-                id: uuid.v4()
-            }
-            pillsArray.push(pill);
-        }
-        let pillsArrayWithOldOnesGone = []
-        for (let j =0; j< pillsArray.length; ++j) {
-          if (pillsArray[j].y1 === 100) {
-            continue;
-          }
-          pillsArrayWithOldOnesGone.push(pillsArray[j])
-        }
-        this.setState({
-            pillsArray: pillsArrayWithOldOnesGone
-        })
-    }
-
-    chooseSpeed() {
-        let speed = 4;
-        if (this.state.counter > 2) {
-            speed = 3;
-        } else if (this.state.counter > 4) {
-            speed = 2;
-        } else if (this.state.counter > 5) {
-            speed = 1;
-        }
-
-        this.setState({
-            transition: speed
-        })
-        return speed;
     }
 
     onPillClick(value) {
         this.setState(prevState => {
             return {
                 ...prevState,
-                counter: prevState.counter + value,
+                temperature: prevState.temperature - (value/2),
+                stageValue: prevState.stageValue - value
             }
         })
     }
 
     render() {
       return React.createElement(PillsGameTemplate, {
-        pillsArray: this.state.pillsArray,
-        counter: this.state.counter,
+        pillsArray: this.state.pills,
+        temperature: this.state.temperature,
         onPillClick: this.onPillClick,
-        timeLeft: this.state.timeLeft
+        timeLeft: this.state.timeLeft,
+        temperature: this.state.temperature
       })
     }
 }

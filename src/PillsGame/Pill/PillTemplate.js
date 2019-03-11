@@ -2,48 +2,42 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { keyframes } from 'styled-components';
 
-import correctSound from './sounds/correct.mp3';
-import incorrectSound from './sounds/incorrect.wav';
 
 export const PillTemplate = ({ 
     canvasRef, 
     onClick, 
-    transition, 
-    type, 
-    x1, 
-    x2, 
-    y1, 
-    y2, 
-    correctSoundRef, 
-    incorrectSoundRef, 
-    greenPillClicked }) => {
+    value,
+    background,
+    margin,
+    height,
+    width
+    }) => {
 
         const movePill = keyframes`
         0% {
-            transform: translate(${x1}vw, ${y1}vh)}
+            opacity: 1}
         100% {
-            transform: translate(${x2}vw, ${y2}vh)
+            opacity: 0
         }
         `;
         return <>
             <Canvas
                 ref={canvasRef}
-                onClick={(e) => onClick(e)}
-                transition={transition}
-                type={type}
-                movePill={movePill}
-                id={type}
-                greenPillClicked={greenPillClicked}
+                onTouchStart={(e) => onClick(e)}
+                background={background}
+                id={value}
+                margin={margin}
+                height={height}
+                width={width}
             />
-            <audio src={correctSound} ref={correctSoundRef} />
-            <audio src={incorrectSound} ref={incorrectSoundRef} />
         </>
 }
 
 const Canvas = styled.div`
-    animation: ${props => props.movePill} ${props => props.transition}s linear infinite;
-    width: 50px;
-    height: 20px;
-    border-radius: 16px;
-    background-color: ${props => props.type === 'killPill' ? `red` : `green`};
+    margin: ${props => props.margin};
+    width: ${props => props.width}px;
+    height: ${props => props.height}px;
+    background: url('${props => props.background}') no-repeat;
+    background-size: contain;
 `;
+// animation: ${props => props.movePill} ${props => props.transition}s linear infinite;

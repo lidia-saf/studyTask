@@ -6,53 +6,29 @@ export class PillBehaviour extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-            greenPillClicked: false
         }
         this.canvas = React.createRef();
-        this.correctSoundRef = React.createRef();
-        this.incorrectSoundRef = React.createRef();
         this.onClick = this.onClick.bind(this);
     }
 
     render() {
         return React.createElement(PillTemplate, {
             canvasRef: this.canvas,
-            type: this.props.type,
-            x1: this.props.x1,
-            x2: this.props.x2,
-            y1: this.props.y1,
-            y2: this.props.y2,
+            value: this.props.value,
+            margin: this.props.margin,
+            height: this.props.height,
+            width: this.props.width,
+            background: this.props.background,
             onClick: this.onClick,
-            transition: this.props.transition,
-            correctSoundRef: this.correctSoundRef,
-            incorrectSoundRef: this.incorrectSoundRef, 
-            greenPillClicked: this.state.greenPillClicked
         })
     }
 
     onClick(event) {
-        const type = event.currentTarget.id;
-        let value = 0;
-        switch (type) {
-            case 'killPill':
-                value = 0;
-                break;
-            case 'healPill':
-                value = 1;
-                break;
-            default:
-            value = 0;
-        }
+        const value = event.currentTarget.id;
+        console.log("I work")
+      
         this.props.onPillClick(value);
-        this.setState({
-            greenPillClicked: true
-        })
-
-        if (type==="killPill") {
-            this.incorrectSoundRef.current.play();
-        } else {
-            this.correctSoundRef.current.play();
-        }
+       
     }
 
 }

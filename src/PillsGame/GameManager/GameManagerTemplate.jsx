@@ -16,7 +16,7 @@ export const GameManagerTemplate = ({
     <Root>
         <StartingPopup 
             closeStartingPopup={closeStartingPopup}
-            startingPopupShown={false} 
+            startingPopupShown={startingPopupShown} 
         />
         <EndingPopup 
             score={score}
