@@ -11,16 +11,48 @@ import UstalinBig from './images/ustalinBig.svg';
 
 
 const falsePills = [
-    ButtonPill,
-    LyingPillBig,
-    SyringeBig,
-    UstalinBig
+    {
+        background: ButtonPill,
+        width: 61,
+        height: 45
+    },
+    {
+        background: LyingPillBig,
+        width: 34,
+        height: 17
+    },
+        
+    {
+        background: SyringeBig,
+        width: 44,
+        height: 70
+    },
+        
+    {
+        background: UstalinBig,
+        width: 44,
+        height: 44
+    },
 ]
 
 const truePills = [
-    Antiustalin,
-    OkhazeltserBig,
-    TempofluBig,
+    
+    {
+        background: Antiustalin,
+        width: 44,
+        height: 44
+    },
+        
+    {
+        background: OkhazeltserBig,
+        width: 47,
+        height: 34
+    },
+    {
+        background: TempofluBig,
+        width: 34,
+        height: 34
+    },
 ]
 
 class PillsGameBehaviour extends React.Component {
@@ -161,7 +193,7 @@ class PillsGameBehaviour extends React.Component {
         } else {
             clearInterval(this.state.timerInterval);
             window.cancelAnimationFrame(this.state.requestId);
-            this.props.getScoreFromPillsGame(this.state.counter);
+            this.props.getScoreFromPillsGame(this.state.temperature);
         }
     }
 
@@ -203,10 +235,14 @@ class PillsGameBehaviour extends React.Component {
         // const newArray = array.map((element) => {
         //     const index = Math.floor(Math.random() * 3)
         //     if (element.value != 1) {
-        //         element.background = index < falsePills.length ? falsePills[index] : falsePills[2];
+        //         element.background = index < falsePills.length ? falsePills[index].background : falsePills[2].background;
+        //         element.width = index < falsePills.length ? falsePills[index].width : falsePills[2].width;
+        //         element.height = index < falsePills.length ? falsePills[index].height : falsePills[2].height;
         //         console.log(falsePills[index])
         //     } else {
-        //         element.background = index < truePills.length ? truePills[index] : truePills[1];
+        //         element.background = index < truePills.length ? truePills[index].background : truePills[1].background;
+        //         element.width = index < truePills.length ? truePills[index].width : truePills[1].width;
+        //         element.height = index < truePills.length ? truePills[index].height : truePills[1].height;
         //     }
         //     return element;
         // })

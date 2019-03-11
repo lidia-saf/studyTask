@@ -40,7 +40,6 @@ const Root = styled.div`
     z-index: 1;
     left: 0;
     top: 0;
-    max-width: 600px;
     width: 100%;
     height: 100%;
     overflow: auto;
