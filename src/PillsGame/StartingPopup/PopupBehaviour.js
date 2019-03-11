@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { PopupTemplate } from './PopupTemplate';
-import { timingSafeEqual } from 'crypto';
 
 export class PopupBehaviour extends React.Component {
     constructor(props) {

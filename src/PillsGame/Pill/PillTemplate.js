@@ -10,16 +10,10 @@ export const PillTemplate = ({
     background,
     margin,
     height,
-    width
+    width,
+    chosen
     }) => {
 
-        const movePill = keyframes`
-        0% {
-            opacity: 1}
-        100% {
-            opacity: 0
-        }
-        `;
         return <>
             <Canvas
                 ref={canvasRef}
@@ -29,9 +23,18 @@ export const PillTemplate = ({
                 margin={margin}
                 height={height}
                 width={width}
+                chosen={chosen}
             />
         </>
 }
+
+const movePill = keyframes`
+        0% {
+            opacity: 1}
+        100% {
+            opacity: 0
+        }
+        `;
 
 const Canvas = styled.div`
     margin: ${props => props.margin};
@@ -39,5 +42,7 @@ const Canvas = styled.div`
     height: ${props => props.height}px;
     background: url('${props => props.background}') no-repeat;
     background-size: contain;
+    opacity: 1;
+    ${props => props.chosen ? `opacity: 0; transition: 0.5s;` : ``};
 `;
-// animation: ${props => props.movePill} ${props => props.transition}s linear infinite;
+// animation: ${movePillmovePill} ${props => props.transition}s linear infinite;

@@ -9,6 +9,20 @@ import SyringeBig from './images/syringeBig.svg';
 import TempofluBig from './images/tempofluBig.svg';
 import UstalinBig from './images/ustalinBig.svg';
 
+
+const falsePills = [
+    ButtonPill,
+    LyingPillBig,
+    SyringeBig,
+    UstalinBig
+]
+
+const truePills = [
+    Antiustalin,
+    OkhazeltserBig,
+    TempofluBig,
+]
+
 class PillsGameBehaviour extends React.Component {
     constructor(props) {
       super(props)
@@ -82,9 +96,6 @@ class PillsGameBehaviour extends React.Component {
                 width: 44,
                 height: 44
             },
-            
-        
-        
             {
                 background: OkhazeltserBig,
                 value: 1,
@@ -95,7 +106,7 @@ class PillsGameBehaviour extends React.Component {
             },
             {
                 background: LyingPillBig,
-                value: 1,
+                value: 0,
                 margin: '6px 10px 8px 2px',
                 width: 34,
                 height: 17
@@ -172,14 +183,38 @@ class PillsGameBehaviour extends React.Component {
                         thenTime: now - (elapsed % fpsInterval)
                     }
                 })
-                this.shufflePills();
+                this.shufflePills(this.state.pills);
             }
         }
     }
 
 
-    shufflePills() {
+    shufflePills(array) {
+        let currentIndex = array.length, temporaryValue, randomIndex;
 
+        while (0 !== currentIndex) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+
+        // const newArray = array.map((element) => {
+        //     const index = Math.floor(Math.random() * 3)
+        //     if (element.value != 1) {
+        //         element.background = index < falsePills.length ? falsePills[index] : falsePills[2];
+        //         console.log(falsePills[index])
+        //     } else {
+        //         element.background = index < truePills.length ? truePills[index] : truePills[1];
+        //     }
+        //     return element;
+        // })
+
+        this.setState({
+            pills: array,
+            stageValue: 4
+        })
     }
 
     onPillClick(value) {

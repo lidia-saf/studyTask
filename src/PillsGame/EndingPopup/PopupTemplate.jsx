@@ -8,7 +8,7 @@ export const PopupTemplate = ({
 }) => (
     <Root isShown={endingPopupShown}>
         <Content>
-            <Title> Вы сбили температуру до {score}С!
+            <Title> Вы сбили температуру до {score} С!
             </Title>
                 <PlayButton onClick={onClick}>Далее</PlayButton>
         </Content>
@@ -26,7 +26,7 @@ const Root = styled.div`
     width: 100%;
     height: 100%;
     overflow: auto;
-    opacity: 0.8;
+    opacity: 0.9;
     background-color: #4f4f4f;
 `;
 
@@ -64,4 +64,5 @@ const PlayButton = styled.button`
         box-shadow: 0px 15px 20px #7e7e7e;
     }
     text-align: center;
+    margin-top: 24px;
 `;

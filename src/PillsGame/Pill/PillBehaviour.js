@@ -6,6 +6,7 @@ export class PillBehaviour extends React.Component {
     constructor(props) {
         super(props);
         this.state={
+            chosen: false
         }
         this.canvas = React.createRef();
         this.onClick = this.onClick.bind(this);
@@ -20,13 +21,18 @@ export class PillBehaviour extends React.Component {
             width: this.props.width,
             background: this.props.background,
             onClick: this.onClick,
+            chosen: this.state.chosen,
         })
     }
 
     onClick(event) {
         const value = event.currentTarget.id;
-        console.log("I work")
-      
+        if (value === "1") {
+            this.setState({
+                chosen: true
+            })
+        };
+
         this.props.onPillClick(value);
        
     }
