@@ -55,7 +55,7 @@ const Content = styled.div`
     padding: 32px;
     border-radius: 10px;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.08);
-    margin: calc((100% - 280px)/2) auto;
+    margin: 150px auto;
 `;
 
 const Title = styled.h1`

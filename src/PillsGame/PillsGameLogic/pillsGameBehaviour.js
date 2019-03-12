@@ -59,7 +59,6 @@ class PillsGameBehaviour extends React.Component {
     constructor(props) {
       super(props)
       this.state={
-          requestId: 0,
           temperature: 40,
           timerInterval: 0,
           stageValue: 4,
@@ -145,41 +144,27 @@ class PillsGameBehaviour extends React.Component {
             },
         ]
       }
-      this.frame = this.frame.bind(this);
       this.onPillClick = this.onPillClick.bind(this);
       this.controlTimer = this.controlTimer.bind(this);
 
     }
 
-    componentDidUpdate(prevProps, _) {
+    componentDidUpdate(prevProps, prevState) {
         if (this.props.gameStarted !== prevProps.gameStarted && this.props.gameStarted === true) {
-            const {
-                requestAnimationFrame,
-                webkitRequestAnimationFrame,
-                mozRequestAnimationFrame,
-                msRequestAnimationFrame,
-                oRequestAnimationFrame,
-            } = window;
-    
-            const requestAF =
-                requestAnimationFrame ||
-                webkitRequestAnimationFrame ||
-                mozRequestAnimationFrame ||
-                msRequestAnimationFrame ||
-                oRequestAnimationFrame;
-            requestAF(this.frame);
             const timerInterval = setInterval(this.controlTimer, 1000);
-            this.setState({requestId: requestAF,
+            this.setState({
                             timerInterval: timerInterval,
                             thenTime: Date.now()
                         });
-            this.mounted = true;
+        }
+
+        if (this.state.stageValue != prevState.stageValue && this.state.stageValue === 0) {
+            this.shufflePills(this.state.pills);
         }
     }
 
     componentWillUnmount() {
-        window.cancelAnimationFrame(this.state.requestId);
-        this.mounted = false;
+        this.clearInterval(this.state.timerInterval);
     }
 
     controlTimer() {
@@ -190,33 +175,10 @@ class PillsGameBehaviour extends React.Component {
                 timeLeft: prevState.timeLeft - 1
                 }
             })
+      
         } else {
             clearInterval(this.state.timerInterval);
-            window.cancelAnimationFrame(this.state.requestId);
             this.props.getScoreFromPillsGame(this.state.temperature);
-        }
-    }
-
-    frame() {
-
-        if (this.state.timeLeft > 0) {
-
-            const fpsInterval = 2000;
-            requestAnimationFrame(this.frame);
-            let now = Date.now();
-            let elapsed = now - this.state.thenTime;
-    
-    
-            if (elapsed > fpsInterval && this.state.stageValue === 0) {
-    
-                this.setState(prevState => {
-                    return {
-                        ...prevState,
-                        thenTime: now - (elapsed % fpsInterval)
-                    }
-                })
-                this.shufflePills(this.state.pills);
-            }
         }
     }
 
@@ -232,23 +194,25 @@ class PillsGameBehaviour extends React.Component {
             array[randomIndex] = temporaryValue;
         }
 
-        // const newArray = array.map((element) => {
-        //     const index = Math.floor(Math.random() * 3)
-        //     if (element.value != 1) {
-        //         element.background = index < falsePills.length ? falsePills[index].background : falsePills[2].background;
-        //         element.width = index < falsePills.length ? falsePills[index].width : falsePills[2].width;
-        //         element.height = index < falsePills.length ? falsePills[index].height : falsePills[2].height;
-        //         console.log(falsePills[index])
-        //     } else {
-        //         element.background = index < truePills.length ? truePills[index].background : truePills[1].background;
-        //         element.width = index < truePills.length ? truePills[index].width : truePills[1].width;
-        //         element.height = index < truePills.length ? truePills[index].height : truePills[1].height;
-        //     }
-        //     return element;
-        // })
+        const newArray = array.map((element) => {
+            let index = 0;
+            if (element.value != 1) {
+                index = Math.floor(Math.random() * falsePills.length);
+                element.background = falsePills[index].background;
+                element.width = falsePills[index].width;
+                element.height = falsePills[index].height;
+                console.log(falsePills[index])
+            } else {
+                index = Math.floor(Math.random() * truePills.length);
+                element.background = truePills[index].background;
+                element.width = truePills[index].width;
+                element.height = truePills[index].height;
+            }
+            return element;
+        })
 
         this.setState({
-            pills: array,
+            pills: newArray,
             stageValue: 4
         })
     }

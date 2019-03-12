@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PillTemplate } from './PillTemplate';
 
-// Responsible for moving from x1, y1 to x2, y2.
+
 export class PillBehaviour extends React.Component {
     constructor(props) {
         super(props);
@@ -12,6 +12,13 @@ export class PillBehaviour extends React.Component {
         this.onClick = this.onClick.bind(this);
     }
 
+    componentDidUpdate(prevProps, _) {
+        if (prevProps.background != this.props.background) {
+            this.setState({
+                chosen: false
+            })
+        }
+    }
     render() {
         return React.createElement(PillTemplate, {
             canvasRef: this.canvas,

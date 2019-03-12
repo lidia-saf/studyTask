@@ -44,6 +44,7 @@ export const PillsGameTemplate = ({
                             onPillClick={onPillClick}
                             width={pill.width}
                             height={pill.height}
+                            chosen={false}
                         />
                     )
                 }
@@ -63,6 +64,7 @@ const Root = styled.section`
     background-color: #ffffff;
     max-width: 600px;
     padding: 24px 16px;
+    margin: 0 auto;
 `;
 
 const GameIndicators = styled.div`
