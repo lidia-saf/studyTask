@@ -13,7 +13,7 @@ export class PillBehaviour extends React.Component {
     }
 
     componentDidUpdate(prevProps, _) {
-        if (prevProps.background != this.props.background) {
+        if (prevProps.background != this.props.background || prevProps.index != this.props.index) {
             this.setState({
                 chosen: false
             })
@@ -29,6 +29,7 @@ export class PillBehaviour extends React.Component {
             background: this.props.background,
             onClick: this.onClick,
             chosen: this.state.chosen,
+            index: this.props.index
         })
     }
 
@@ -40,7 +41,7 @@ export class PillBehaviour extends React.Component {
             })
         };
 
-        this.props.onPillClick(value);
+        this.props.onPillClick(value, this.canvas.current);
        
     }
 

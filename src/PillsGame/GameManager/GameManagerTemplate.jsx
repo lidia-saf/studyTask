@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import { StartingPopup } from '../StartingPopup';
 import { PillsGameLogic } from '../PillsGameLogic/index';
-import { EndingPopup } from '../EndingPopup';
 
 export const GameManagerTemplate = ({
     closeStartingPopup,
@@ -17,10 +16,6 @@ export const GameManagerTemplate = ({
         <StartingPopup 
             closeStartingPopup={closeStartingPopup}
             startingPopupShown={startingPopupShown} 
-        />
-        <EndingPopup 
-            score={score}
-            endingPopupShown={endingPopupShown}
         />
         <PillsGameLogic
             gameStarted={gameStarted}

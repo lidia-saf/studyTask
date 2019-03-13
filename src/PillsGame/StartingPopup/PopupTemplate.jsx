@@ -43,8 +43,7 @@ const Root = styled.div`
     width: 100%;
     height: 100%;
     overflow: auto;
-    opacity: 0.9;
-    background-color: #4f4f4f;
+    background-color: rgba(79, 79, 79, 0.9);
     margin: 0 auto;
 `;
 
@@ -54,7 +53,7 @@ const Content = styled.div`
     max-height: 280px;
     padding: 32px;
     border-radius: 10px;
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0);
     margin: 150px auto;
 `;
 

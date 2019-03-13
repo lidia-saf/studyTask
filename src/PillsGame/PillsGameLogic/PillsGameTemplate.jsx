@@ -30,21 +30,25 @@ export const PillsGameTemplate = ({
                     <PicturePill3 width={33} height={20} background={Okhlazeltser} />
                 </EligiblePills>
                 <ProgressBar>
-                    <Temperature temperature={temperature}>{temperature}</Temperature>
+                    <Temperature temperature={temperature * 2}>
+                        <TemperatureIndicator>
+                            {temperature}
+                        </TemperatureIndicator>
+                    </Temperature>
                 </ProgressBar>
             </GameIndicators>
             <PillsContainer>
                 {pillsArray.map((pill,i) => {
                     return (
                         <PillBehaviour
-                            key={i}
+                            key={pill.chosen}
+                            index={i}
                             value={pill.value}
                             margin={pill.margin}
                             background={pill.background}
                             onPillClick={onPillClick}
                             width={pill.width}
                             height={pill.height}
-                            chosen={false}
                         />
                     )
                 }
@@ -115,10 +119,12 @@ const ProgressBar  = styled.div`
     border-radius: 8px;
     border: solid 2px #4f4f4f;
     padding: 4px;
+    display: flex;
+    justify-content: flex-end;
 `;
 
 const Game = styled.div`
-    height: 340px;
+    min-height: 340px;
     background-color: #ffffff;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.08);
     border-radius: 10px;
@@ -173,12 +179,23 @@ const PillsContainer = styled.div`
 
 const Temperature = styled.div`
     height: 24px;
+    width: 146px;
+    transition: width 0.25s ease;
+    width: ${props => props.temperature}px;
     border-radius: 6px;
+    margin-right: 0;
+    text-align: right;
+    line-height: 24px;
+    background-image: linear-gradient(to left, #dedede, #a7a7a7 50%, #474747);
+    position: relative;
+`;
+
+const TemperatureIndicator = styled.div`
+    position: absolute;
+    right: 0;
+    top: 0;
     font-size: 16px;
     font-weight: 500;
     color: #4f4f4f;
-    margin: 0 auto;
-    text-align: right;
-    line-height: 24px;
-    background-image: linear-gradient(to left, #dedede, #a7a7a7 50%, #6d6d6d);
+
 `;

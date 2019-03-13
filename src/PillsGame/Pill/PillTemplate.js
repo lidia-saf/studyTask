@@ -11,7 +11,8 @@ export const PillTemplate = ({
     margin,
     height,
     width,
-    chosen
+    chosen,
+    index
     }) => {
 
         return <>
@@ -21,6 +22,7 @@ export const PillTemplate = ({
                 onClick={(e) => onClick(e)}
                 background={background}
                 id={value}
+                data-value={index}
                 margin={margin}
                 height={height}
                 width={width}
@@ -31,7 +33,8 @@ export const PillTemplate = ({
 
 const movePill = keyframes`
         0% {
-            opacity: 1}
+            opacity: 1
+        }
         100% {
             opacity: 0
         }
@@ -43,7 +46,14 @@ const Canvas = styled.div`
     height: ${props => props.height}px;
     background: url('${props => props.background}') no-repeat;
     background-size: contain;
-    opacity: 1;
-    ${props => props.chosen ? `opacity: 0; transition: 0.5s;` : ``};
+    visibility: visible;
+    ${props => props.chosen && `
+    visibility: hidden;`}
+    flex-basis: 20%;
 `;
 // animation: ${movePillmovePill} ${props => props.transition}s linear infinite;
+
+// opacity: 1;
+//     ${props => props.chosen && `
+//     transition: opacity 0.5s;
+//     opacity: 0;`};
