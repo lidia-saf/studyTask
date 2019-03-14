@@ -4,26 +4,15 @@ import styled from 'styled-components';
 import { StartingPopup } from '../StartingPopup';
 import { PillsGameLogic } from '../PillsGameLogic/index';
 
-export const GameManagerTemplate = ({
-    closeStartingPopup,
-    startingPopupShown,
-    gameStarted,
-    getScoreFromPillsGame,
-    endingPopupShown,
-    score
-}) => (
-    <Root>
-        <StartingPopup 
-            closeStartingPopup={closeStartingPopup}
-            startingPopupShown={startingPopupShown} 
-        />
-        <PillsGameLogic
-            gameStarted={gameStarted}
-            getScoreFromPillsGame={getScoreFromPillsGame}
-        />
-    </Root>
+export class GameManagerTemplate extends React.Component  {
+  render(props){
+    return (<Root>
+        <StartingPopup />
+        <PillsGameLogic/>
+    </Root>);
 
-);
+  }
+}
 
 const Root = styled.section`
     box-sizing: border-box;

@@ -1,43 +1,21 @@
 import * as React from 'react';
 import { GameManagerTemplate } from './GameManagerTemplate';
+import { connect } from 'react-redux'
 
-export class GameManagerBehaviour extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            startingPopupShown: true,
-            endingPopupShown: false,
-            gameStarted: false,
-            score: 0
-        }
-
-        this.closeStartingPopup = this.closeStartingPopup.bind(this);
-        this.getScoreFromPillsGame = this.getScoreFromPillsGame.bind(this);
-    }
-
+class __GameManagerBehaviour extends React.Component {
     render() {
-        return React.createElement(GameManagerTemplate, {
-            closeStartingPopup: this.closeStartingPopup,
-            startingPopupShown: this.state.startingPopupShown,
-            gameStarted: this.state.gameStarted,
-            getScoreFromPillsGame: this.getScoreFromPillsGame,
-            endingPopupShown: this.state.endingPopupShown,
-            score: this.state.score
-        })
+        return (<GameManagerTemplate/>);
     }
-
-    closeStartingPopup() {
-        this.setState({
-            startingPopupShown: false,
-            gameStarted: true
-        })
-    }
-
-    getScoreFromPillsGame(score) {
-        this.setState({
-            score,
-            endingPopupShown: true
-        })
-    }
-
 }
+
+const mapStateToProps = state => ({})
+
+const mapDispatchToProps = dispatch => ({
+  closeStartingPopup: () => dispatch({type:'STARTING_POPUP_NOT_SHOWN'}),
+  showEndingPopup: () => dispatch({type: 'ENDING_POPUP_SHOWN'})
+})
+
+export const GameManagerBehaviour = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(__GameManagerBehaviour)

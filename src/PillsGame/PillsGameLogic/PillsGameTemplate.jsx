@@ -1,64 +1,51 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { PillBehaviour } from '../Pill/PillBehaviour';
-import PromoBackground from './images/promoBackground.svg';
+import PromoBackground from '../Pill/images/promoBackground.svg';
+import { connect } from 'react-redux'
 
-import Antiustalin from './images/antiustalin.svg';
-import Okhlazeltser from './images/okhlazeltser.svg';
-import Tempoflu from './images/tempoflu.svg';
+import Antiustalin from '../Pill/images/antiustalin.svg';
+import Okhlazeltser from '../Pill/images/okhlazeltser.svg';
+import Tempoflu from '../Pill/images/tempoflu.svg';
 
-export const PillsGameTemplate = ({
-    pillsArray,
-    temperature,
-    onPillClick,
-    timeLeft
-}) => (
+import { TimerContainer } from './Timer/Timer';
+import { PillContainerContainer } from './PillContainer/PillContainerContainer';
+
+export const PillsGameTemplate = (props) => (
     <Root>
-        <Controls>
-            <Timer>0:{timeLeft < 10 ? `0${timeLeft}` : timeLeft}</Timer>
-            <GameStep>
-                <StepFirst>8</StepFirst>
-                <Divider>/</Divider>
-                <StepSecond>10</StepSecond>
-            </GameStep>
-        </Controls>
-        <Game>
-            <GameIndicators>
-                <EligiblePills>
-                    <PicturePill1 width={16} height={16} background={Tempoflu} />
-                    <PicturePill2 width={22} height={12}  background={Antiustalin} />
-                    <PicturePill3 width={33} height={20} background={Okhlazeltser} />
-                </EligiblePills>
-                <ProgressBar>
-                    <Temperature temperature={temperature * 2}>
-                        <TemperatureIndicator>
-                            {temperature}
-                        </TemperatureIndicator>
-                    </Temperature>
-                </ProgressBar>
-            </GameIndicators>
-            <PillsContainer>
-                {pillsArray.map((pill,i) => {
-                    return (
-                        <PillBehaviour
-                            key={pill.chosen}
-                            index={i}
-                            value={pill.value}
-                            margin={pill.margin}
-                            background={pill.background}
-                            onPillClick={onPillClick}
-                            width={pill.width}
-                            height={pill.height}
-                        />
-                    )
-                }
-                )}
-            </PillsContainer>
-        </Game>
-
-
+        <ControlContainer />
+        <GameContainer />
     </Root>
-);
+          );
+
+const ControlContainer = (props) => (
+  <Controls>
+      <TimerContainer />
+      <GameStep>
+          <StepFirst>8</StepFirst>
+          <Divider>/</Divider>
+          <StepSecond>10</StepSecond>
+      </GameStep>
+  </Controls>
+)
+
+const GameContainer = (props) => (
+  <Game>
+      <GameIndicators>
+          <EligiblePills>
+              <PicturePill1 width={16} height={16} background={Tempoflu} />
+              <PicturePill2 width={22} height={12}  background={Antiustalin} />
+              <PicturePill3 width={33} height={20} background={Okhlazeltser} />
+          </EligiblePills>
+          <ProgressBar>
+              <TemperatureContainer />
+          </ProgressBar>
+      </GameIndicators>
+      <PillContainerContainer />
+  </Game>
+)
+
+
 
 const Root = styled.section`
     @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
@@ -139,16 +126,6 @@ const Controls = styled.div`
     justify-content: space-between;
 `;
 
-const Timer = styled.div`
-    display: inline-block;
-    font-size: 24px;
-    font-weight: 300;
-    color: #4f4f4f;
-`;
-
-const GameStep = styled.span`
-    
-`;
 
 const StepFirst = styled.span`
     font-size: 24px;
@@ -170,12 +147,12 @@ const StepSecond = styled.span`
     color: #4f4f4f;
 `;
 
-const PillsContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding: 41px 0 36px;
+
+const GameStep = styled.span`
+
 `;
+
+
 
 const Temperature = styled.div`
     height: 24px;
@@ -199,3 +176,17 @@ const TemperatureIndicator = styled.div`
     color: #4f4f4f;
 
 `;
+
+const TemperaturePresentation = ({temperature}) => (
+  <Temperature temperature={temperature * 2}>
+      <TemperatureIndicator>
+          {temperature}
+      </TemperatureIndicator>
+  </Temperature>
+);
+
+const mapStateToProps2 = state => ({
+  temperature: state.score.temp
+})
+
+const TemperatureContainer = connect(mapStateToProps2)(TemperaturePresentation)
