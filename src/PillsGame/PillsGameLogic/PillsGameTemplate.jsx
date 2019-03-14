@@ -16,7 +16,7 @@ export const PillsGameTemplate = (props) => (
         <ControlContainer />
         <GameContainer />
     </Root>
-          );
+);
 
 const ControlContainer = (props) => (
   <Controls>
@@ -33,9 +33,9 @@ const GameContainer = (props) => (
   <Game>
       <GameIndicators>
           <EligiblePills>
-              <PicturePill1 width={16} height={16} background={Tempoflu} />
-              <PicturePill2 width={22} height={12}  background={Antiustalin} />
-              <PicturePill3 width={33} height={20} background={Okhlazeltser} />
+              <PicturePill1 src={Tempoflu} />
+              <PicturePill2 src={Antiustalin} />
+              <PicturePill3 src={Okhlazeltser} />
           </EligiblePills>
           <ProgressBar>
               <TemperatureContainer />
@@ -47,7 +47,7 @@ const GameContainer = (props) => (
 
 
 
-const Root = styled.section`
+const Root = styled.div`
     @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
     position: relative;
     background: url("${PromoBackground}") no-repeat;
@@ -76,14 +76,14 @@ const EligiblePills = styled.div`
     margin-right: 5px;
 `;
 
-const PicturePill1 = styled.div`
+const PicturePill1 = styled.img`
     width: 18px;
     height: 18px;
     background-size: contain;
     background: url("${props => props.background}") no-repeat;
 `;
 
-const PicturePill2 = styled.div`
+const PicturePill2 = styled.img`
     width: 19px;
     height: 23px;
     background-size: contain;
@@ -91,7 +91,7 @@ const PicturePill2 = styled.div`
 `;
 
 
-const PicturePill3 = styled.div`
+const PicturePill3 = styled.img`
     width: 35px;
     height: 21px;
     background-size: contain;
