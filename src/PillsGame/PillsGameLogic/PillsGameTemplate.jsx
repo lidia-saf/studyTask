@@ -11,40 +11,48 @@ import Tempoflu from '../Pill/images/tempoflu.svg';
 import { TimerContainer } from './Timer/Timer';
 import { PillContainerContainer } from './PillContainer/PillContainerContainer';
 
-export const PillsGameTemplate = (props) => (
-    <Root>
-        <ControlContainer />
-        <GameContainer />
-    </Root>
-);
+export const PillsGameTemplate = (props) => {
+    console.log('render PillsGameTemplate');
+    return (
+        <Root>
+            <ControlContainer />
+            <GameContainer />
+        </Root>
+    )
+};
 
-const ControlContainer = (props) => (
-  <Controls>
-      <TimerContainer />
-      <GameStep>
-          <StepFirst>8</StepFirst>
-          <Divider>/</Divider>
-          <StepSecond>10</StepSecond>
-      </GameStep>
-  </Controls>
-)
+const ControlContainer = (props) => {
+    console.log('Render controls');
+    return (
+        <Controls>
+            <TimerContainer />
+            <GameStep>
+                <StepFirst>8</StepFirst>
+                <Divider>/</Divider>
+                <StepSecond>10</StepSecond>
+            </GameStep>
+        </Controls>
+    )
+}
 
-const GameContainer = (props) => (
-  <Game>
-      <GameIndicators>
-          <EligiblePills>
-              <PicturePill1 src={Tempoflu} />
-              <PicturePill2 src={Antiustalin} />
-              <PicturePill3 src={Okhlazeltser} />
-          </EligiblePills>
-          <ProgressBar>
-              <TemperatureContainer />
-          </ProgressBar>
-      </GameIndicators>
-      <PillContainerContainer />
-  </Game>
-)
+const GameContainer = (props) => {
+    console.log('Render Game container')
 
+    return (<Game>
+        <GameIndicators>
+            <EligiblePills>
+                <PicturePill1 src={Tempoflu} />
+                <PicturePill2 src={Antiustalin} />
+                <PicturePill3 src={Okhlazeltser} />
+            </EligiblePills>
+            <ProgressBar>
+                <TemperatureContainer />
+            </ProgressBar>
+        </GameIndicators>
+        <PillContainerContainer />
+    </Game>
+    )
+}  
 
 
 const Root = styled.div`
