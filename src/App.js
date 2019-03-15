@@ -52,7 +52,7 @@ const endingPopup = (state = true, action) => {
   }
 }
 
-const timeLeft = (state = {}, action) => {
+const timeLeft = (state = {timeLeft: 10}, action) => {
   switch (action.type) {
     case 'START_TIMER':
       const interval = setInterval(action.decreaseTimer, 1000);

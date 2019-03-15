@@ -79,11 +79,12 @@ const GameIndicators = styled.div`
 `;
 
 const EligiblePills = styled.div`
-    width: 89px;
-    height: 26px;
+    width: 113px;
+    height: 32px;
     border-radius: 8px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
-    background-color: rgba(196, 196, 196, 0.53);
+    background-color: #57b650;
+    opacity: 0.9;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -117,12 +118,12 @@ const PicturePill3 = styled.img`
 const ProgressBar  = styled.div`
     width: 148px;
     height: 24px;
-    opacity: 0.2;
     border-radius: 8px;
-    border: solid 2px #4f4f4f;
+    border: solid 2px #aaebff;
     padding: 4px;
     display: flex;
     justify-content: flex-end;
+    background-color: transparent;
 `;
 
 const Game = styled.div`
@@ -183,22 +184,22 @@ const Temperature = styled.div`
     margin-right: 0;
     text-align: right;
     line-height: 24px;
-    background-image: linear-gradient(to left, #dedede, #a7a7a7 50%, #474747);
+    background-color: #f7434c;
     position: relative;
 `;
 
 const TemperatureIndicator = styled.div`
     position: absolute;
-    right: 0;
+    right: 5px;
     top: 0;
     font-size: 16px;
     font-weight: 500;
-    color: #4f4f4f;
+    color: #ffffff;
 
 `;
 
 const TemperaturePresentation = ({temperature}) => (
-  <Temperature temperature={temperature * 2}>
+  <Temperature temperature={temperature * 3}>
       <TemperatureIndicator>
           {temperature}
       </TemperatureIndicator>
