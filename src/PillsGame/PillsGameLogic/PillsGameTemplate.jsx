@@ -61,7 +61,6 @@ const Root = styled.div`
     @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
     position: relative;
     max-width: 600px;
-    padding: 24px 16px;
     margin: 0 auto;
 `;
 
@@ -131,10 +130,10 @@ const Game = styled.div`
     background-color: #ffffff;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.08);
     border-radius: 10px;
-    margin-top: 165px;
     padding: 16px;
     position: relative;
     z-index: 1000;
+    margin: 165px auto 0;
 `;
 
 
@@ -144,6 +143,7 @@ const Controls = styled.div`
     justify-content: space-between;
     position: relative;
     z-index: 1000;
+    margin: 0 auto;
 `;
 
 

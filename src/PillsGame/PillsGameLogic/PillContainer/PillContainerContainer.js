@@ -12,8 +12,8 @@ class __PillContainerContainer extends React.Component {
 
     render() {
         const array = []
-        const totalNumberOfTruePills = 4;
-        const totalNumberOfFalsePills = 6;
+        const totalNumberOfTruePills = 9;
+        const totalNumberOfFalsePills = 10;
         for(let i =0; i< totalNumberOfTruePills;++i) {
             let random = Math.floor(Math.random()*truePills.length)
             array.push({index: random, type: 'truePills'});

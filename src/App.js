@@ -19,7 +19,7 @@ const temp = (state = 40, action) => {
 const score = (state = {temp: 40, score: 0, iteration: 1}, action) => {
   switch (action.type) {
     case 'CORRECT_PILL_CLICKED':
-    return {temp: state.temp - 1/4, iteration: (state.iteration + 1) % 4, score: state.score + 1}
+    return {temp: state.temp - 1/4, iteration: (state.iteration + 1) % 9, score: state.score + 1}
     default:
       return state
   }

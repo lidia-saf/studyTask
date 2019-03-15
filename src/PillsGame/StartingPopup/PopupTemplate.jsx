@@ -43,7 +43,7 @@ const Root = styled.div`
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(79, 79, 79, 0.9);
+    background-color: rgba(79, 79, 79, 0.95);
     margin: 0 auto;
 `;
 
@@ -53,8 +53,13 @@ const Content = styled.div`
     max-height: 280px;
     padding: 32px;
     border-radius: 10px;
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.8);
     margin: 150px auto;
+
+    @media (min-width: 1024px) {
+        width: 844px;
+        height: 556px;
+    }
 `;
 
 const Title = styled.h1`
