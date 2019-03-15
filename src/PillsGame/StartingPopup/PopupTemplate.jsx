@@ -37,7 +37,7 @@ const Root = styled.div`
     display: ${props => props.isShown ? `block` : `none`};
     @import url('https://fonts.googleapis.com/css?family=Raleway:400,500,600');
     position: fixed;
-    z-index: 1;
+    z-index: 2000;
     left: 0;
     top: 0;
     width: 100%;

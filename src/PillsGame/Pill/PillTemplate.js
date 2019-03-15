@@ -40,7 +40,7 @@ export class __PillTemplate  extends React.Component {
                 src={pill.background}
                 onClick={this.generateClickFunction(pill.value).bind(this)}
                 onTouchStart={this.generateClickFunction(pill.value).bind(this)}
-                style={{width: pill.width+"px", height:pill.height+"px", visibility: this.state.chosen ? 'hidden': 'visible', flexBasis:"20%" }}
+                style={{width: pill.width+"px", height:pill.height+"px", margin: pill.margin, visibility: this.state.chosen ? 'hidden': 'visible', flexBasis:"20%" }}
             />
         </>
       }

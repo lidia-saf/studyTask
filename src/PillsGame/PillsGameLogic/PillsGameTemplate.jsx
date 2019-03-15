@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { PillBehaviour } from '../Pill/PillBehaviour';
 import PromoBackground from '../Pill/images/promoBackground.svg';
+import PromoBG from '../Pill/images/promoBG.png';
 import { connect } from 'react-redux'
 
 import Antiustalin from '../Pill/images/antiustalin.svg';
@@ -15,6 +16,7 @@ export const PillsGameTemplate = (props) => {
     console.log('render PillsGameTemplate');
     return (
         <Root>
+            <Image src={PromoBG}/>
             <ControlContainer />
             <GameContainer />
         </Root>
@@ -58,13 +60,19 @@ const GameContainer = (props) => {
 const Root = styled.div`
     @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
     position: relative;
-    background: url("${PromoBackground}") no-repeat;
-    background-size: 100% auto;
-    background-color: #ffffff;
     max-width: 600px;
     padding: 24px 16px;
     margin: 0 auto;
 `;
+
+const Image = styled.img`
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    position: absolute;
+    top: 0;
+`;
+
 
 const GameIndicators = styled.div`
     display: flex;
@@ -125,6 +133,8 @@ const Game = styled.div`
     border-radius: 10px;
     margin-top: 165px;
     padding: 16px;
+    position: relative;
+    z-index: 1000;
 `;
 
 
@@ -132,6 +142,8 @@ const Controls = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
+    position: relative;
+    z-index: 1000;
 `;
 
 
